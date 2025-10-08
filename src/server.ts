@@ -16,11 +16,10 @@ const server = express();
 server.set('view engine', 'mustache'); //“Vou usar Mustache para renderizar meus HTMLs.”
 server.set('views', path.join(__dirname, 'views')); // “Meus templates HTML estão na pasta views.”
 server.engine('mustache', mustache()) // “Quando eu pedir para renderizar um .mustache, usa a função do Mustache para transformar isso em HTML com os dados que eu passar.”
+server.use(express.static(path.join(__dirname, '../public')));
 server.use(mainRoutes);
 server.use((req, res) => {
-    res.send('página não encontrada')
+    res.render('pages/404')
 })
-server.use(express.static(path.join(__dirname, '../public')));
-
 
 server.listen(process.env.PORT);
